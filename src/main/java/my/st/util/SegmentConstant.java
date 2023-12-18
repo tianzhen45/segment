@@ -9,5 +9,5 @@ public class SegmentConstant {
 
     public final static String ST_PATH = "config/最新标准.csv";
 
-    public final static String INOUT_PATH = "config/inout.txt";
+    public final static String SYNONYMS_PATH = "config/最新同义词.csv";
 }
