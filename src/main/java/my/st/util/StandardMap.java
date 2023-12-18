@@ -15,7 +15,9 @@ public class StandardMap {
         return map;
     }
 
-
+    /**
+     *  Map <standName -> StandNo>
+     */
     private StandardMap() {
         try {
             for (CSVRecord l : CSVUtil.getStRecords()) {

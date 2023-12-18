@@ -29,7 +29,9 @@ public class SegmentService {
 
     private static JiebaSegmenter segmenter;
 
-
+    /**
+     * 加载csv词根文件到dict
+     */
     private void init(){
         try {
             List<CSVRecord> records = CSVUtil.getWordRecords();
