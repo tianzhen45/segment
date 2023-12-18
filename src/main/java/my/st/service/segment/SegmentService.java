@@ -1,8 +1,10 @@
-package my.st.util;
+package my.st.service.segment;
 
 import com.huaban.analysis.jieba.JiebaSegmenter;
 import com.huaban.analysis.jieba.SegToken;
 import com.huaban.analysis.jieba.WordDictionary;
+import my.st.util.CSVUtil;
+import my.st.util.SegmentConstant;
 import org.apache.commons.csv.CSVRecord;
 
 import java.io.FileWriter;

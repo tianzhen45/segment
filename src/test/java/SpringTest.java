@@ -1,5 +1,6 @@
 import com.huaban.analysis.jieba.SegToken;
 import my.st.SegmentApplication;
+import my.st.service.segment.SegmentService;
 import my.st.util.*;
 import my.st.service.segment.StandardSegmentService;
 import org.junit.Test;

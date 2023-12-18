@@ -1,2 +1,0 @@
-资金_监管账户_帐号_	_cptlreacaccno	CPTL_REAC_ACCNO_?_cptlreacaccno
-信贷_等级_	_crgrd	CR_GRD_?_crgrd

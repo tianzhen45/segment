@@ -24,7 +24,7 @@ public class TranslateHelper {
         }catch (Exception e){
             e.printStackTrace();
         }
-        System.out.printf("翻译组件加载完成,加载单词数量:%d", WORD_MAP.size());
+        System.out.printf("翻译组件加载完成,加载单词数量:%d\n", WORD_MAP.size());
     }
 
 

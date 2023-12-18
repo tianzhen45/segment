@@ -5,7 +5,7 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
-import my.st.util.SegmentService;
+import my.st.service.segment.SegmentService;
 import my.st.util.TranslateHelper;
 
 import my.st.util.SegmentConstant;

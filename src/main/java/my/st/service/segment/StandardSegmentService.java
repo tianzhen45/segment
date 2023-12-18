@@ -2,7 +2,6 @@ package my.st.service.segment;
 
 
 import com.huaban.analysis.jieba.SegToken;
-import my.st.util.SegmentService;
 import my.st.util.TranslateHelper;
 import org.springframework.stereotype.Service;
 

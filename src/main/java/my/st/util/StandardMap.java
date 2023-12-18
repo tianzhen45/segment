@@ -26,6 +26,6 @@ public class StandardMap {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        System.out.printf("标准加载完成,数量:%d", ST_MAP.size());
+        System.out.printf("标准加载完成,数量:%d\n", ST_MAP.size());
     }
 }
