@@ -1,4 +1,4 @@
-package my.segment;
+package my.st.segment;
 
 import com.huaban.analysis.jieba.JiebaSegmenter;
 import com.huaban.analysis.jieba.SegToken;

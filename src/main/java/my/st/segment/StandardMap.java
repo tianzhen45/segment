@@ -1,4 +1,4 @@
-package my.segment;
+package my.st.segment;
 
 import org.apache.commons.csv.CSVRecord;
 

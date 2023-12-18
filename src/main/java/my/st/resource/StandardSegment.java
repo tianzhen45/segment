@@ -1,6 +1,6 @@
-package my.resource;
+package my.st.resource;
 
-import my.segment.StandardSegmentService;
+import my.st.service.segment.StandardSegmentService;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;

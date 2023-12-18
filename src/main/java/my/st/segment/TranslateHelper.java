@@ -1,4 +1,4 @@
-package my.segment;
+package my.st.segment;
 
 import java.util.HashMap;
 import java.util.Map;

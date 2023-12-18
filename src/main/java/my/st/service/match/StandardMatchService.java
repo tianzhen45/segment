@@ -1,11 +1,13 @@
-package my.segment;
+package my.st.service.match;
 
+
+import my.st.segment.StandardMap;
 import org.springframework.stereotype.Service;
 
 import javax.inject.Inject;
 
 @Service
-public class StandardMatch {
+public class StandardMatchService {
 
     @Inject
     private StandardMap standardMap;
