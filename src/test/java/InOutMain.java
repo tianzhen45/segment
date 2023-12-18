@@ -5,10 +5,10 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
-import my.segment.SegmentService;
-import my.segment.TranslateHelper;
+import my.st.util.SegmentService;
+import my.st.util.TranslateHelper;
 
-import my.segment.SegmentConstant;
+import my.st.util.SegmentConstant;
 
 
 public class InOutMain {

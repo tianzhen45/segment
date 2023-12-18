@@ -1,7 +1,7 @@
 package my.st.service.match;
 
 
-import my.st.segment.StandardMap;
+import my.st.util.StandardMap;
 import org.springframework.stereotype.Service;
 
 import javax.inject.Inject;

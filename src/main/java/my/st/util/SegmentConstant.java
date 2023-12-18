@@ -1,4 +1,4 @@
-package my.st.segment;
+package my.st.util;
 
 public class SegmentConstant {
     public final static String CONFIG_PATH = "config";

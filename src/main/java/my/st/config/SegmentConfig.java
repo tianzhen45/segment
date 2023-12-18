@@ -1,9 +1,8 @@
 package my.st.config;
 
-import my.st.segment.SegmentService;
-import my.st.segment.StandardMap;
-import my.st.segment.TranslateHelper;
-import my.st.segment.StandardMap;
+import my.st.util.SegmentService;
+import my.st.util.StandardMap;
+import my.st.util.TranslateHelper;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 

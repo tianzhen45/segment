@@ -1,4 +1,4 @@
-package my.st.segment;
+package my.st.util;
 
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;

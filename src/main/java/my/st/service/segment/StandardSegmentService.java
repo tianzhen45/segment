@@ -2,12 +2,11 @@ package my.st.service.segment;
 
 
 import com.huaban.analysis.jieba.SegToken;
-import my.st.segment.SegmentService;
-import my.st.segment.TranslateHelper;
+import my.st.util.SegmentService;
+import my.st.util.TranslateHelper;
 import org.springframework.stereotype.Service;
 
 import javax.inject.Inject;
-import java.util.ArrayList;
 import java.util.List;
 
 @Service

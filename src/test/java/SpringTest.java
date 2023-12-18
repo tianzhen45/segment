@@ -1,7 +1,7 @@
 import com.huaban.analysis.jieba.SegToken;
 import my.st.SegmentApplication;
-import my.segment.*;
-import my.service.segment.StandardSegmentService;
+import my.st.util.*;
+import my.st.service.segment.StandardSegmentService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
