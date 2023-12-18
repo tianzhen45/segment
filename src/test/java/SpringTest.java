@@ -33,29 +33,7 @@ public class SpringTest {
     @Inject
     private StandardMap standardMap;
 
-    @Test
-    public void run1() throws Exception {
-        BufferedReader bfr = new BufferedReader(new FileReader(SegmentConstant.INOUT_PATH));
-        ArrayList<String> readList = bfr.lines().collect(Collectors.toCollection(ArrayList::new));
-        bfr.close();
 
-        BufferedWriter bfw = new BufferedWriter(new FileWriter(SegmentConstant.INOUT_PATH));
-        readList.forEach(l -> {
-            List<SegToken> segTokens = segmentService.doSegment(TranslateHelper.replaceSign(l));
-            StringBuilder sb = new StringBuilder();
-            StringBuilder sb2 = new StringBuilder();
-            for (SegToken segToken : segTokens) {
-                sb.append(segToken.word).append("_");
-                sb2.append(translateHelper.translate(segToken.word)).append("_");
-            }
-            try {
-                bfw.write(sb.deleteCharAt(sb.length() - 1).append("\t").append(sb2.deleteCharAt(sb2.length() - 1)).append("\r\n").toString());
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        });
-        bfw.close();
-    }
 
     @Test
     public void testSegService() {
