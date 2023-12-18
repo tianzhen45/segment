@@ -3,7 +3,7 @@ package my.st.service.match;
 
 import my.st.domain.match.MatchEntry;
 import my.st.domain.match.MatchResult;
-import my.st.domain.match.MatchType;
+import my.st.domain.type.MatchType;
 import my.st.util.StandardMap;
 import org.springframework.stereotype.Service;
 

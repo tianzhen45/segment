@@ -2,7 +2,9 @@ package my.st.service.segment;
 
 
 import com.huaban.analysis.jieba.SegToken;
+import my.st.service.analysis.StandardAnalysisService;
 import my.st.util.TranslateHelper;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
 import javax.inject.Inject;
@@ -17,10 +19,12 @@ public class StandardSegmentService {
     @Inject
     private TranslateHelper translateHelper;
 
+    @Inject
+    private StandardAnalysisService analysisService;
 
     public String doStandardNameSeg(List<String> readList) {
         StringBuilder builder = new StringBuilder();
-        readList.forEach(l -> {
+        readList.stream().filter(StringUtils::isNotEmpty).forEach(l -> {
             List<SegToken> segTokens = segmentService.doSegment(TranslateHelper.replaceSign(l));
             StringBuilder sb = new StringBuilder();
             StringBuilder sb2 = new StringBuilder();
@@ -30,6 +34,13 @@ public class StandardSegmentService {
             }
             builder.append(sb.deleteCharAt(sb.length() - 1).append("\t").append(sb2.deleteCharAt(sb2.length() - 1)).append("\r\n"));
         });
+        return builder.toString();
+    }
+
+    public String doStandardTypeInfer(List<String> list) {
+        StringBuilder builder = new StringBuilder();
+        list.stream().filter(StringUtils::isNotEmpty).forEach(l ->
+                builder.append(l).append("\t").append(analysisService.inferStandType(l)).append("\n"));
         return builder.toString();
     }
 }

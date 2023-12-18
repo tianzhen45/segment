@@ -1,4 +1,4 @@
-package my.st.domain.match;
+package my.st.domain.type;
 
 public enum MatchType {
     // 与标准完全相等的匹配

@@ -1,5 +1,7 @@
 package my.st.domain.match;
 
+import my.st.domain.type.MatchType;
+
 public class MatchEntry {
 
     private String standNo;

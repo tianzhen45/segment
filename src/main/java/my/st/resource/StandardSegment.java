@@ -20,4 +20,9 @@ public class StandardSegment {
     public String name(String names){
         return standardSegmentService.doStandardNameSeg(Arrays.asList(names.split("\n")));
     }
+
+    @PostMapping("/type")
+    public String type(String names){
+        return standardSegmentService.doStandardTypeInfer(Arrays.asList(names.split("\n")));
+    }
 }
