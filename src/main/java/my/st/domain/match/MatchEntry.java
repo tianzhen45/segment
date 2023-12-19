@@ -2,6 +2,8 @@ package my.st.domain.match;
 
 import my.st.domain.type.MatchType;
 
+import java.util.Objects;
+
 public class MatchEntry {
 
     private String standNo;
@@ -14,6 +16,10 @@ public class MatchEntry {
         this.standNo = standNo;
         this.standName = standName;
         this.type = type;
+    }
+
+    public MatchType getType() {
+        return type;
     }
 
     public String getStandNo() {
@@ -39,5 +45,18 @@ public class MatchEntry {
                 ", standName='" + standName + '\'' +
                 ", matchType='" + type + '\'' +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        MatchEntry that = (MatchEntry) o;
+        return Objects.equals(standNo, that.standNo);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(standNo);
     }
 }

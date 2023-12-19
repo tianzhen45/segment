@@ -22,6 +22,7 @@ public class StandardSegmentService {
     @Inject
     private StandardTypeInferService analysisService;
 
+
     /**
      * 批量执行分词并翻译
      *  Name -> SEG1_SEG2'\t'ENG1_ENG2
