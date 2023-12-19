@@ -13,10 +13,10 @@ public enum StandardType {
     NUM("数值类"),
     // 金额类
     MONEY("金额类"),
-    // 其他类型
-    OTHER("其他类型");
+    //文本类
+    TEXT("文本类");
 
-    private String name;
+    private final String name;
 
     StandardType(String name) {
         this.name = name;

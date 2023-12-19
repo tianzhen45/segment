@@ -2,7 +2,7 @@ package my.st.service.match;
 
 import my.st.SegmentApplication;
 
-import my.st.service.analysis.StandardAnalysisService;
+import my.st.service.analysis.StandardTypeInferService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -20,7 +20,7 @@ public class StandardMatchServiceTest {
     StandardMatchService matchService;
 
     @Inject
-    StandardAnalysisService  analysisService;
+    StandardTypeInferService analysisService;
 
 
     @Test
@@ -31,6 +31,6 @@ public class StandardMatchServiceTest {
     @Test
     public void inferType(){
         Stream.of("业务管户客户经理编号","主担保方式代码","违约标识","解除时间","机构编码")
-                .forEach(s -> System.out.println(s+" -> "+analysisService.inferStandType(s)));
+                .forEach(s -> System.out.println(s+" -> "+analysisService.inferStandTypeByName(s)));
     }
 }

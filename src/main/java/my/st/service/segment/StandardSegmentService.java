@@ -2,7 +2,7 @@ package my.st.service.segment;
 
 
 import com.huaban.analysis.jieba.SegToken;
-import my.st.service.analysis.StandardAnalysisService;
+import my.st.service.analysis.StandardTypeInferService;
 import my.st.util.TranslateHelper;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
@@ -20,8 +20,12 @@ public class StandardSegmentService {
     private TranslateHelper translateHelper;
 
     @Inject
-    private StandardAnalysisService analysisService;
+    private StandardTypeInferService analysisService;
 
+    /**
+     * 批量执行分词并翻译
+     *  Name -> SEG1_SEG2'\t'ENG1_ENG2
+     */
     public String doStandardNameSeg(List<String> readList) {
         StringBuilder builder = new StringBuilder();
         readList.stream().filter(StringUtils::isNotEmpty).forEach(l -> {
@@ -40,7 +44,7 @@ public class StandardSegmentService {
     public String doStandardTypeInfer(List<String> list) {
         StringBuilder builder = new StringBuilder();
         list.stream().filter(StringUtils::isNotEmpty).forEach(l ->
-                builder.append(l).append("\t").append(analysisService.inferStandType(l)).append("\n"));
+                builder.append(l).append("\t").append(analysisService.inferStandTypeByName(l)).append("\n"));
         return builder.toString();
     }
 }
