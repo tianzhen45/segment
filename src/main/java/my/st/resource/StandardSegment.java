@@ -40,6 +40,11 @@ public class StandardSegment {
     @ResponseBody
     @PostMapping("/match")
     public List<MatchResult> match(String names){
-        return matchService.doBatchMath(Arrays.asList(names.split("\n")));
+        return matchService.doBatchMatch(Arrays.asList(names.split("\n")));
+    }
+
+    @PostMapping("/match_str")
+    public String matchString(String names){
+        return matchService.doBatchMatchStringResult(Arrays.asList(names.split("\n")));
     }
 }
