@@ -1,5 +1,9 @@
 package my.st.domain.match;
 
+import my.st.util.CSVUtil;
+import org.apache.commons.csv.CSVRecord;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -7,10 +11,13 @@ import java.util.List;
 
 @Component
 public class ReplaceRules {
-
+    //尾部替换规则
     private final List<Rule> endReplaceRules;
 
-    private final List<Rule> containReplaceRules;
+    //同义词替换规则
+    private final List<Rule> synonymsRules;
+
+    private final static Logger logger = LoggerFactory.getLogger(ReplaceRules.class);
 
     public ReplaceRules(){
         endReplaceRules = new ArrayList<>();
@@ -30,7 +37,21 @@ public class ReplaceRules {
         endReplaceRules.add(new Rule("员$", "员工号"));
         endReplaceRules.add(new Rule("户名$", "账户名称"));
         endReplaceRules.add(new Rule("账户账号$", "账号"));
-        containReplaceRules = new ArrayList<>();
+        endReplaceRules.add(new Rule("编码$", "号"));
+        endReplaceRules.add(new Rule("号$", "编号"));
+        endReplaceRules.add(new Rule("号$", "号码"));
+
+        synonymsRules = new ArrayList<>();
+
+        try {
+            for (CSVRecord synRecord : CSVUtil.getSynRecords()) {
+                synonymsRules.add(new Rule(synRecord.get(0),synRecord.get(1)));
+                synonymsRules.add(new Rule(synRecord.get(1),synRecord.get(0)));
+            }
+        } catch (Exception e) {
+            logger.error("读取文件[同义词.csv]失败",e);
+        }
+        logger.info("匹配规则加载完成，尾部替换规则:{}条，同义词替换规则:{}条\n",endReplaceRules.size(),synonymsRules.size());
     }
 
 
@@ -38,8 +59,8 @@ public class ReplaceRules {
         return endReplaceRules;
     }
 
-    public List<Rule> getContainReplaceRules() {
-        return containReplaceRules;
+    public List<Rule> getSynonymsRules() {
+        return synonymsRules;
     }
 
     public final static class Rule{

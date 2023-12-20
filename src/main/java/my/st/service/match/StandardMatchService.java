@@ -61,8 +61,9 @@ public class StandardMatchService {
 
         strictMatch(matchResult);
 
-        computeMatch(matchResult);
-
+        if(matchResult.getList().isEmpty()){
+            computeMatch(matchResult);
+        }
         return matchResult;
     }
 
@@ -75,18 +76,16 @@ public class StandardMatchService {
      * 对转换后的字符串进行相等匹配
      */
     public void equalMatch(MatchResult matchResult, String str, MatchType type) {
-        Optional<String> stringOptional = standardMap.ST_MAP.keySet().stream().filter(k -> k.equals(str)).findAny();
-        stringOptional.ifPresent(k ->
-                matchResult.addEntry(new MatchEntry(standardMap.ST_MAP.get(k), k, type))
-        );
+        if (standardMap.ST_MAP.containsKey(str)) {
+            matchResult.addEntry(new MatchEntry(standardMap.ST_MAP.get(str), str, type));
+        }
     }
 
     /**
      * 对转换后的字符串进行包含匹配
      */
     public void containsMatch(MatchResult matchResult, String str, MatchType type) {
-        Optional<String> stringOptional = standardMap.ST_MAP.keySet().stream().filter(k -> k.contains(str)).findAny();
-        stringOptional.ifPresent(k ->
+        standardMap.ST_MAP.keySet().stream().filter(k -> k.contains(str)).findAny().ifPresent(k ->
                 matchResult.addEntry(new MatchEntry(standardMap.ST_MAP.get(k), k, type))
         );
     }
@@ -95,15 +94,28 @@ public class StandardMatchService {
      * 对转换后的字符串进行尾部匹配
      */
     public void endsWithMatch(MatchResult matchResult, String str, MatchType type) {
-        Optional<String> stringOptional = standardMap.ST_MAP.keySet().stream().filter(k -> k.endsWith(str)).findAny();
-        stringOptional.ifPresent(k ->
+        standardMap.ST_MAP.keySet().stream().filter(k -> k.endsWith(str)).findAny().ifPresent(k ->
                 matchResult.addEntry(new MatchEntry(standardMap.ST_MAP.get(k), k, type))
         );
     }
 
     public void computeMatch(MatchResult matchResult) {
-        // 替换特殊字符、尾部数字和错误词语
         String sentence = preReplace(matchResult.getSentence());
+        baseMatch(matchResult, sentence);
+
+        for(ReplaceRules.Rule r: replaceRules.getSynonymsRules()){
+            if(sentence.contains(r.getRegex())){
+                baseMatch(matchResult,sentence.replace(r.getRegex(),r.getReplaceWord()));
+            }
+        }
+    }
+
+
+    /*
+     * 相等匹配一次，尾部替换规则匹配
+     */
+    private void baseMatch(MatchResult matchResult, String sentence) {
+
         equalMatch(matchResult, sentence, MatchType.COMPUTE);
 
         for (ReplaceRules.Rule r : replaceRules.getEndReplaceRules()) {
@@ -112,10 +124,9 @@ public class StandardMatchService {
             }
         }
 
-        if (sentence.contains("号") && !sentence.contains("编号"))
-            equalMatch(matchResult, sentence.replaceFirst("号$", "编号"), MatchType.COMPUTE);
-
-        // 代码类
+        // 加[编号、名称、代码]匹配
+        equalMatch(matchResult, sentence + "编号", MatchType.COMPUTE);
+        equalMatch(matchResult, sentence + "名称", MatchType.COMPUTE);
         equalMatch(matchResult, sentence + "代码", MatchType.COMPUTE);
 
         // 标志类
@@ -129,7 +140,7 @@ public class StandardMatchService {
 
 
     /**
-     * 模糊匹配，拆分核心词匹配
+     * 模糊匹配，分词后核心词匹配
      */
     public void vagueMatch(MatchResult matchResult) {
 
@@ -137,6 +148,7 @@ public class StandardMatchService {
 
     /**
      * 转换匹配前替换
+     * 替换特殊字符、尾部数字和错误词语
      */
     public String preReplace(String str) {
         return str.replace("帐", "账")

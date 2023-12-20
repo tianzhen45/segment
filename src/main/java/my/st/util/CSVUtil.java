@@ -28,5 +28,10 @@ public class CSVUtil {
         return  CSVParser.parse(new File(SegmentConstant.ST_PATH), StandardCharsets.UTF_8, CSVFormat.EXCEL).getRecords();
     }
 
-
+    /**
+     *  读取同义词文件
+     */
+    public static List<CSVRecord> getSynRecords()throws Exception{
+        return  CSVParser.parse(new File(SegmentConstant.SYNONYMS_PATH), StandardCharsets.UTF_8, CSVFormat.EXCEL).getRecords();
+    }
 }
