@@ -10,6 +10,9 @@ import org.springframework.stereotype.Service;
 import javax.inject.Inject;
 import java.util.List;
 
+/**
+ * 标准分词并翻译服务
+ */
 @Service
 public class StandardSegmentService {
 
@@ -25,7 +28,7 @@ public class StandardSegmentService {
 
     /**
      * 批量执行分词并翻译
-     *  Name -> SEG1_SEG2'\t'ENG1_ENG2
+     *  <p>Name -> SEG1_SEG2'\t'ENG1_ENG2
      */
     public String doStandardNameSeg(List<String> readList) {
         StringBuilder builder = new StringBuilder();
@@ -42,6 +45,9 @@ public class StandardSegmentService {
         return builder.toString();
     }
 
+    /**
+     * 批量推断标准类型
+     */
     public String doStandardTypeInfer(List<String> list) {
         StringBuilder builder = new StringBuilder();
         list.stream().filter(StringUtils::isNotEmpty).forEach(l ->

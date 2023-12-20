@@ -10,6 +10,7 @@ import org.apache.commons.csv.CSVRecord;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
 import java.io.FileWriter;
@@ -17,7 +18,11 @@ import java.io.IOException;
 import java.nio.file.Paths;
 import java.util.List;
 import java.util.Optional;
-@Component
+
+/**
+ * 分词服务
+ */
+@Service
 public class SegmentService {
 
 

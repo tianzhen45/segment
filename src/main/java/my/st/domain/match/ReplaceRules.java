@@ -9,6 +9,9 @@ import org.springframework.stereotype.Component;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ *  标准匹配字符串转换规则
+ */
 @Component
 public class ReplaceRules {
     //尾部替换规则

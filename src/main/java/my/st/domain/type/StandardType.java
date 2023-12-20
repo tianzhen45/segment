@@ -1,5 +1,8 @@
 package my.st.domain.type;
 
+/**
+ * 标准数据类别
+ */
 public enum StandardType {
     // 标志类
     FLAG("标志类"),

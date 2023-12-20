@@ -1,5 +1,8 @@
 package my.st.domain.type;
 
+/**
+ * 标准匹配类型枚举类
+ */
 public enum MatchType {
     // 与标准完全相等的匹配
     STRICT("严格匹配"),

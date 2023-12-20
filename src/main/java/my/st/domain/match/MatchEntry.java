@@ -4,6 +4,9 @@ import my.st.domain.type.MatchType;
 
 import java.util.Objects;
 
+/**
+ * 标准匹配单条结果
+ */
 public class MatchEntry {
 
     private String standNo;

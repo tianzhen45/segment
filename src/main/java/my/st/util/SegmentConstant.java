@@ -3,6 +3,9 @@ package my.st.util;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ *  配置常量类
+ */
 public class SegmentConstant {
     public final static String CONFIG_PATH = "config";
 

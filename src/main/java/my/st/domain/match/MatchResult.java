@@ -3,6 +3,9 @@ package my.st.domain.match;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * 标准匹配结果集
+ */
 public class MatchResult {
 
     private String sentence;

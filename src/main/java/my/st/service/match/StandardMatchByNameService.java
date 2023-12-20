@@ -41,10 +41,13 @@ public class StandardMatchByNameService {
     @Inject
     private ReplaceRules replaceRules;
 
-
+    /**
+     * 批量匹配，返回格式化csv字符串
+     */
     public String doBatchMatchStringResult(List<String> list) {
         StringBuilder sb = new StringBuilder();
-        for (MatchResult matchResult : list.stream().map(this::doMatch).collect(Collectors.toList())) {
+        for (String s : list) {
+            MatchResult matchResult = doMatch(s);
             if (matchResult.getList().isEmpty()) {
                 sb.append(matchResult.getSentence()).append("\r\n");
             }
@@ -58,6 +61,9 @@ public class StandardMatchByNameService {
         return sb.toString();
     }
 
+    /**
+     * 批量匹配，返回MatchResult对象
+     */
     public List<MatchResult> doBatchMatch(List<String> list) {
         return list.stream().map(this::doMatch).collect(Collectors.toList());
     }

@@ -8,6 +8,9 @@ import javax.annotation.PostConstruct;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ *  翻译工具类
+ */
 @Component
 public class TranslateHelper {
 

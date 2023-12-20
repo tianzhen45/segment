@@ -9,6 +9,10 @@ import javax.annotation.PostConstruct;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * 标准名称->标准编号的Map
+ * <p> Map <standName -> StandNo>
+ */
 @Component
 public class StandardMap {
 
