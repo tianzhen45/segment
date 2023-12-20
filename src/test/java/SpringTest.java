@@ -1,19 +1,17 @@
-import com.huaban.analysis.jieba.SegToken;
+import com.huaban.analysis.jieba.JiebaSegmenter;
 import my.st.SegmentApplication;
 import my.st.service.segment.SegmentService;
-import my.st.util.*;
 import my.st.service.segment.StandardSegmentService;
+import my.st.util.StandardMap;
+import my.st.util.TranslateHelper;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import javax.inject.Inject;
-import java.io.*;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @SpringBootTest(classes = SegmentApplication.class)
 @RunWith(SpringRunner.class)
@@ -45,5 +43,10 @@ public class SpringTest {
     @Test
     public void testStMap(){
         System.out.println(standardMap.ST_MAP.get("特别委托授权对象"));
+    }
+
+    @Test
+    public void testSegService2() {
+        System.out.println(segmentService.doSegment("上期平均数主营产品", JiebaSegmenter.SegMode.INDEX));
     }
 }

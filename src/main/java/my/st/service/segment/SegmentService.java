@@ -58,4 +58,8 @@ public class SegmentService {
     public List<SegToken> doSegment(String sentence) {
         return segmenter.process(Optional.ofNullable(sentence).orElse(""), JiebaSegmenter.SegMode.SEARCH);
     }
+
+    public List<SegToken> doSegment(String sentence,JiebaSegmenter.SegMode mode) {
+        return segmenter.process(Optional.ofNullable(sentence).orElse(""), mode);
+    }
 }
