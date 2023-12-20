@@ -19,15 +19,18 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /**
- * 字段中文对标匹配
+ * 根据字段中文对标匹配
  */
 @Service
-public class StandardMatchService {
+public class StandardMatchByNameService {
 
-    private static final Logger log = LoggerFactory.getLogger(StandardMatchService.class);
+    private static final Logger log = LoggerFactory.getLogger(StandardMatchByNameService.class);
 
     //模糊匹配数量
     private static final int VAGUE_MATCH_COUNT = 5;
+
+    //是否启用模糊匹配
+    private static final boolean VAGUE_ACTIVE = false;
 
     @Inject
     private StandardMap standardMap;
@@ -71,7 +74,7 @@ public class StandardMatchService {
 
             computeMatch(matchResult);
 
-            if (matchResult.getList().isEmpty()) {
+            if (matchResult.getList().isEmpty() && VAGUE_ACTIVE) {
                 vagueMatch(matchResult);
             }
         }

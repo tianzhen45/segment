@@ -5,25 +5,21 @@ import com.huaban.analysis.jieba.SegToken;
 import com.huaban.analysis.jieba.WordDictionary;
 import my.st.util.CSVUtil;
 import my.st.util.SegmentConstant;
+import my.st.util.TranslateHelper;
 import org.apache.commons.csv.CSVRecord;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Component;
 
+import javax.annotation.PostConstruct;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Paths;
 import java.util.List;
 import java.util.Optional;
-
+@Component
 public class SegmentService {
 
-    private final static SegmentService segmentService = new SegmentService();
-
-    public static SegmentService getInstance(){
-        return segmentService;
-    }
-
-    private SegmentService(){
-        init();
-    }
 
     public JiebaSegmenter getSegmenter() {
         return segmenter;
@@ -31,9 +27,12 @@ public class SegmentService {
 
     private static JiebaSegmenter segmenter;
 
+    public final static Logger logger = LoggerFactory.getLogger(SegmentService.class);
+
     /**
      * 加载csv词根文件到dict
      */
+    @PostConstruct
     private void init(){
         try {
             List<CSVRecord> records = CSVUtil.getWordRecords();
@@ -50,6 +49,7 @@ public class SegmentService {
             fileWriter.close();
             segmenter = new JiebaSegmenter();
             WordDictionary.getInstance().init(Paths.get(SegmentConstant.CONFIG_PATH));
+            logger.info("词根库初始化完成，加载数量:{}",records.size());
         } catch (Exception e) {
             e.printStackTrace();
         }

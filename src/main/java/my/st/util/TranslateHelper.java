@@ -1,22 +1,24 @@
 package my.st.util;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Component;
+
+import javax.annotation.PostConstruct;
 import java.util.HashMap;
 import java.util.Map;
 
-
+@Component
 public class TranslateHelper {
 
     public final Map<String, String> WORD_MAP = new HashMap<>();
 
     public static final String NON_WORD_REX ="[\"“”，,。.—\\-\\_<>\\(\\)（）？\\?:\\\\/]";
 
-    private static final TranslateHelper instance = new TranslateHelper();
+    public final static Logger logger = LoggerFactory.getLogger(TranslateHelper.class);
 
-    public static TranslateHelper getInstance(){
-        return instance;
-    }
-
-    private TranslateHelper(){
+    @PostConstruct
+    private void init(){
         try {
             CSVUtil.getWordRecords().forEach(l -> {
                 WORD_MAP.put(l.get(1),l.get(3));
@@ -24,7 +26,7 @@ public class TranslateHelper {
         }catch (Exception e){
             e.printStackTrace();
         }
-        System.out.printf("翻译组件加载完成,加载单词数量:%d\n", WORD_MAP.size());
+        logger.info("翻译组件加载完成,加载单词数量:{}\n", WORD_MAP.size());
     }
 
 

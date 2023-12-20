@@ -1,24 +1,26 @@
 package my.st.util;
 
 import org.apache.commons.csv.CSVRecord;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Component;
 
+import javax.annotation.PostConstruct;
 import java.util.HashMap;
 import java.util.Map;
 
+@Component
 public class StandardMap {
 
     public final Map<String, String> ST_MAP = new HashMap<>();
 
-    private static final StandardMap map = new StandardMap();
-
-    public static StandardMap getInstance() {
-        return map;
-    }
+    public final static Logger logger = LoggerFactory.getLogger(StandardMap.class);
 
     /**
      *  Map <standName -> StandNo>
      */
-    private StandardMap() {
+    @PostConstruct
+    private void init() {
         try {
             for (CSVRecord l : CSVUtil.getStRecords()) {
                 ST_MAP.put(l.get(1), l.get(0));
@@ -26,6 +28,6 @@ public class StandardMap {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        System.out.printf("标准加载完成,数量:%d\n", ST_MAP.size());
+        logger.info("标准加载完成,数量:{}\n", ST_MAP.size());
     }
 }

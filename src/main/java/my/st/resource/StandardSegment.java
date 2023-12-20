@@ -1,7 +1,7 @@
 package my.st.resource;
 
 import my.st.domain.match.MatchResult;
-import my.st.service.match.StandardMatchService;
+import my.st.service.match.StandardMatchByNameService;
 import my.st.service.segment.StandardSegmentService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,7 +25,7 @@ public class StandardSegment {
     private StandardSegmentService standardSegmentService;
 
     @Inject
-    private StandardMatchService matchService;
+    private StandardMatchByNameService matchService;
 
     @PostMapping("/name")
     public String name(String names){

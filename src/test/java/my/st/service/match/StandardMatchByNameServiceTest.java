@@ -14,10 +14,10 @@ import java.util.stream.Stream;
 
 @SpringBootTest(classes = SegmentApplication.class)
 @RunWith(SpringRunner.class)
-public class StandardMatchServiceTest {
+public class StandardMatchByNameServiceTest {
 
     @Inject
-    StandardMatchService matchService;
+    StandardMatchByNameService matchService;
 
     @Inject
     StandardTypeInferService analysisService;
