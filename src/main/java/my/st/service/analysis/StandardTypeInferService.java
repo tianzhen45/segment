@@ -1,9 +1,11 @@
 package my.st.service.analysis;
 
 import my.st.domain.type.StandardType;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import static my.st.util.SegmentConstant.*;
@@ -51,5 +53,16 @@ public class StandardTypeInferService {
      */
     public StandardType inferStandTypeByDT(String sentence) {
         return StandardType.TEXT;
+    }
+
+
+    /**
+     * 批量推断标准类型
+     */
+    public String doStandardTypeInfer(List<String> list) {
+        StringBuilder builder = new StringBuilder();
+        list.stream().filter(StringUtils::isNotEmpty).forEach(l ->
+                builder.append(l).append("\t").append(this.inferStandTypeByName(l)).append("\n"));
+        return builder.toString();
     }
 }

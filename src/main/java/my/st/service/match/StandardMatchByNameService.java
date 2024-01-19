@@ -196,7 +196,7 @@ public class StandardMatchByNameService {
                 .replace("）", ")")
                 .replace("（", "(")
                 .replaceAll("\\(.*?\\)", "")
-                .replaceFirst("[0-9]$", "")
+                .replaceFirst("[0-9]+$", "")
                 .replaceFirst(TranslateHelper.NON_WORD_REX, "")
                 .toUpperCase();
     }

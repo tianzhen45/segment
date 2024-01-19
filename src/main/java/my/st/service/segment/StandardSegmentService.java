@@ -45,13 +45,5 @@ public class StandardSegmentService {
         return builder.toString();
     }
 
-    /**
-     * 批量推断标准类型
-     */
-    public String doStandardTypeInfer(List<String> list) {
-        StringBuilder builder = new StringBuilder();
-        list.stream().filter(StringUtils::isNotEmpty).forEach(l ->
-                builder.append(l).append("\t").append(analysisService.inferStandTypeByName(l)).append("\n"));
-        return builder.toString();
-    }
+
 }
