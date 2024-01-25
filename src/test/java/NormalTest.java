@@ -1,5 +1,7 @@
 import org.junit.Test;
 
+import java.io.File;
+
 public class NormalTest {
 
 
@@ -26,6 +28,11 @@ public class NormalTest {
     public void run4(){
         String s = "流(ABC)水号(A,.af+s-s，s。w+B-C)";
         System.out.println(s.replaceAll("[\\,\\.\\+\\-，。]",""));
+    }
+
+    @Test
+    public void readFile(){
+        System.out.println(new File("config/user.dict").exists());
     }
 }
 

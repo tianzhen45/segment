@@ -2,6 +2,7 @@ package my.st.util;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
@@ -20,10 +21,14 @@ public class TranslateHelper {
 
     public final static Logger logger = LoggerFactory.getLogger(TranslateHelper.class);
 
+    @Autowired
+    CSVUtil csvUtil;
+
+
     @PostConstruct
     private void init(){
         try {
-            CSVUtil.getWordRecords().forEach(l -> {
+            csvUtil.getWordRecords().forEach(l -> {
                 WORD_MAP.put(l.get(1),l.get(3));
             });
         }catch (Exception e){

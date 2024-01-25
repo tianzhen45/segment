@@ -1,0 +1,6 @@
+myapp:
+  dict-path: /app/config/user.dict
+  word-path: /app/config/latest_word.csv
+  st-path: /app/config/latest_st.csv
+  synonyms-path: /app/config/latest_synonyms.csv
+  config-path: /app/config
