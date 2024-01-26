@@ -14,10 +14,7 @@ public class QuestionService {
   
     public String getAnswer(String question)throws Exception {
         // 与AI问答接口通信获取答案的逻辑
-        return callAIAnswer(question);  
-    }
-
-    private String callAIAnswer(String question)throws Exception {
         return agent.answer(question);
     }
+
 }

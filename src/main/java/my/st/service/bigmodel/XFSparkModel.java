@@ -18,6 +18,9 @@ import java.nio.charset.StandardCharsets;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
+/**
+ * 讯飞大模型AI问答服务
+ */
 @Component
 public class XFSparkModel implements AIAgent {
 
@@ -33,7 +36,7 @@ public class XFSparkModel implements AIAgent {
     @Value("${big-model.api-key}")
     private String apiKey;
 
-    private Gson gson = new Gson();
+    private final Gson gson = new Gson();
 
     @ConcurrentControl(type = "XFModel",value = 2)
     @Override
