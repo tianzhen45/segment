@@ -13,8 +13,7 @@ public class QuestionService {
     }
   
     public String getAnswer(String question)throws Exception {
-        // 与AI问答接口通信获取答案的逻辑  
-        // 假设有一个callAIAnswer函数用于调用AI接口，返回答案字符串  
+        // 与AI问答接口通信获取答案的逻辑
         return callAIAnswer(question);  
     }
 

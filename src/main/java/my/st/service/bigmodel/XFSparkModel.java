@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.google.gson.Gson;
+import my.st.config.ConcurrentControl;
 import okhttp3.*;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -34,6 +35,7 @@ public class XFSparkModel implements AIAgent {
 
     private Gson gson = new Gson();
 
+    @ConcurrentControl(type = "XFModel",value = 2)
     @Override
     public String answer(String question) throws Exception {
         String authUrl = getAuthUrl(hostUrl, apiKey, apiSecret);
