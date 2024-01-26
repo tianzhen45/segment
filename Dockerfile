@@ -7,7 +7,7 @@ WORKDIR /app
 COPY target/segment-1.0-SNAPSHOT.jar /app
 COPY config/* /app/config/
 
-# 暴露应用程序的端口（如果与默认的8080端口不同，请修改）
+# 暴露应用程序的端口
 EXPOSE 9876
 
 # 运行你的应用程序
