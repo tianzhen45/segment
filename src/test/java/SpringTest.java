@@ -4,6 +4,7 @@ import my.st.service.segment.SegmentService;
 import my.st.service.segment.StandardSegmentService;
 import my.st.util.StandardMap;
 import my.st.util.TranslateHelper;
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -48,5 +49,15 @@ public class SpringTest {
     @Test
     public void testSegService2() {
         System.out.println(segmentService.doSegment("上期平均数主营产品", JiebaSegmenter.SegMode.INDEX));
+    }
+
+    @Test
+    public void testTranslate01(){
+        Assert.assertEquals(translateHelper.translate("产品"),"PROD");
+    }
+
+    @Test
+    public void testTranslate02(){
+        Assert.assertEquals(translateHelper.translate("产品XCD"),"?");
     }
 }

@@ -1,5 +1,6 @@
 package my.st.util;
 
+import my.st.domain.repo.WordRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,22 +23,7 @@ public class TranslateHelper {
     public final static Logger logger = LoggerFactory.getLogger(TranslateHelper.class);
 
     @Autowired
-    CSVUtil csvUtil;
-
-
-    @PostConstruct
-    private void init(){
-        try {
-            csvUtil.getWordRecords().forEach(l -> {
-                WORD_MAP.put(l.get(1),l.get(3));
-            });
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-        logger.info("翻译组件加载完成,加载单词数量:{}\n", WORD_MAP.size());
-    }
-
-
+    WordRepository wordRepository;
 
     /**
      * 中文单词翻译成英文
@@ -49,7 +35,7 @@ public class TranslateHelper {
     public String translate(String cnWord) {
         return cnWord.matches("[a-zA-Z]+") ?
                 cnWord :
-                WORD_MAP.getOrDefault(cnWord, "?");
+                wordRepository.getEnName(cnWord);
     }
 
     /**

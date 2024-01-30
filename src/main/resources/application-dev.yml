@@ -4,3 +4,8 @@ myapp:
   st-path: config/latest_st.csv
   synonyms-path: config/latest_synonyms.csv
   config-path: config
+
+spring:
+  redis:
+    host: localhost
+    port: 6379
