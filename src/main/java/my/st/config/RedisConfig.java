@@ -10,7 +10,7 @@ import org.springframework.data.redis.repository.configuration.EnableRedisReposi
 @Configuration
 @EnableRedisRepositories
 public class RedisConfig {  
-    // 你可以在这里添加自定义的Redis配置，例如使用Lettuce或Jedis客户端。
+
     @Autowired
     private RedisConnectionFactory redisConnectionFactory;
 
