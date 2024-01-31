@@ -31,11 +31,12 @@ public class WordRepository{
     @PostConstruct
     private void init(){
         try {
+            long startTime = System.currentTimeMillis();
             List<CSVRecord> wordRecords = csvUtil.getWordRecords();
             for (CSVRecord wordRecord : wordRecords) {
-                 redisTemplate.opsForHash().put(REDIS_KEY,wordRecord.get(1),wordRecord.get(3));
+                 redisTemplate.opsForHash().putIfAbsent(REDIS_KEY,wordRecord.get(1),wordRecord.get(3));
             }
-            logger.info("标准加载完成,数量:{}\n", wordRecords.size());
+            logger.info("完成加载词语{}条，耗时{}ms\n", wordRecords.size(),System.currentTimeMillis()-startTime);
         } catch (Exception e) {
            e.printStackTrace();
         }

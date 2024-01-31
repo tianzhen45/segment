@@ -8,7 +8,7 @@ COPY target/segment-1.0-SNAPSHOT.jar /app
 COPY config/* /app/config/
 
 # 暴露应用程序的端口
-EXPOSE 9876
+EXPOSE 9878
 
 # 运行你的应用程序
 CMD ["java", "-jar", "segment-1.0-SNAPSHOT.jar","--spring.profiles.active=prod"]

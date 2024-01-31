@@ -5,6 +5,7 @@ import com.huaban.analysis.jieba.JiebaSegmenter;
 import my.st.domain.match.MatchEntry;
 import my.st.domain.match.MatchResult;
 import my.st.domain.match.ReplaceRules;
+import my.st.domain.repo.StandRepository;
 import my.st.domain.type.MatchType;
 import my.st.service.segment.SegmentService;
 import my.st.util.StandardMap;
@@ -34,6 +35,9 @@ public class StandardMatchByNameService {
 
     @Inject
     private StandardMap standardMap;
+
+    @Inject
+    private StandRepository standRepository;
 
     @Inject
     private SegmentService segmentService;

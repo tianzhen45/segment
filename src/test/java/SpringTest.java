@@ -1,5 +1,6 @@
 import com.huaban.analysis.jieba.JiebaSegmenter;
 import my.st.SegmentApplication;
+import my.st.domain.repo.StandRepository;
 import my.st.service.segment.SegmentService;
 import my.st.service.segment.StandardSegmentService;
 import my.st.util.StandardMap;
@@ -32,6 +33,8 @@ public class SpringTest {
     @Inject
     private StandardMap standardMap;
 
+    @Inject
+    private StandRepository standRepository;
 
 
     @Test
@@ -59,5 +62,10 @@ public class SpringTest {
     @Test
     public void testTranslate02(){
         Assert.assertEquals(translateHelper.translate("产品XCD"),"?");
+    }
+
+    @Test
+    public void testStandRepo(){
+        System.out.println(standRepository.get("单据日期"));
     }
 }
