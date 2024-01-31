@@ -1,11 +1,14 @@
 package my.st.util;
 
+import my.st.domain.repo.Word;
+import my.st.domain.repo.WordRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
+import javax.inject.Inject;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -21,18 +24,14 @@ public class TranslateHelper {
 
     public final static Logger logger = LoggerFactory.getLogger(TranslateHelper.class);
 
-    @Autowired
-    CSVUtil csvUtil;
+    @Inject
+    WordRepository wordRepository;
 
 
     @PostConstruct
     private void init(){
-        try {
-            csvUtil.getWordRecords().forEach(l -> {
-                WORD_MAP.put(l.get(1),l.get(3));
-            });
-        }catch (Exception e){
-            e.printStackTrace();
+        for (Word word : wordRepository.findAll()) {
+            WORD_MAP.put(word.getCnName(),word.getEnName());
         }
         logger.info("翻译组件加载完成,加载单词数量:{}\n", WORD_MAP.size());
     }
