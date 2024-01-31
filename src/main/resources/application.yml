@@ -8,9 +8,16 @@ logging:
 spring:
   profiles:
     active: dev
+  datasource:
+    url: jdbc:mysql://localhost:3306/seg?useSSL=false&serverTimezone=UTC
+    username: root
+    password: root
+    driver-class-name: com.mysql.jdbc.Driver
 
 big-model:
   host-url: https://spark-api.xf-yun.com/v3.1/chat
   app-id: 219fd387
   api-secret: MWE0YjNiNjRhOGQ3YTVhZGJhNjllOGE3
   api-key: 3b78dc95b907235d474625f3d7ee8e72
+
+
