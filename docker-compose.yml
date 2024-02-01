@@ -6,3 +6,17 @@ services:
       dockerfile: Dockerfile
     ports:
       - "9876:9876"
+    environment:
+      MYSQL_URL: mysql
+      MYSQL_PORT: 33060
+    depends_on:
+      - mysql
+  mysql:
+    image: "segment-mysql:latest"
+    ports:
+      - "33060:3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=seg
+    volumes:
+      - E:/DevelopSpace/segment/mysql/data:/var/lib/mysql

@@ -4,3 +4,10 @@ myapp:
   st-path: /app/config/latest_st.csv
   synonyms-path: /app/config/latest_synonyms.csv
   config-path: /app/config
+
+spring:
+  datasource:
+    url: jdbc:mysql://${MYSQL_URL}:${MYSQL_PORT}/seg?useSSL=false&serverTimezone=UTC
+    username: root
+    password: root
+    driver-class-name: com.mysql.jdbc.Driver
