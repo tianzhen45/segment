@@ -7,16 +7,16 @@ services:
     ports:
       - "9876:9876"
     environment:
-      MYSQL_URL: mysql
-      MYSQL_PORT: 33060
+      MYSQL_URL: mysql   # mysql容器地址
+      MYSQL_PORT: 3306   # mysql容器端口
     depends_on:
       - mysql
   mysql:
-    image: "segment-mysql:latest"
+    image: "mysql:5.7"
     ports:
-      - "33060:3306"
+      - "33060:3306"   # 将容器3306端口映射到宿主机的33060端口
     environment:
       - MYSQL_ROOT_PASSWORD=root
       - MYSQL_DATABASE=seg
     volumes:
-      - E:/DevelopSpace/segment/mysql/data:/var/lib/mysql
+      - E:/DevelopSpace/segment/mysql/data:/var/lib/mysql # mysql容器数据存储目录挂载到宿主机固定目录下，所有该镜像下的容器都共用数据库数据
