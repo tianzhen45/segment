@@ -2,11 +2,11 @@ package my.st.service.segment;
 
 
 import com.huaban.analysis.jieba.SegToken;
-import my.st.service.analysis.StandardTypeInferService;
 import my.st.util.TranslateHelper;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import javax.inject.Inject;
 import java.util.List;
 
@@ -16,14 +16,12 @@ import java.util.List;
 @Service
 public class StandardSegmentService {
 
-    @Inject
+    @Resource
     private SegmentService segmentService;
 
-    @Inject
+    @Resource
     private TranslateHelper translateHelper;
 
-    @Inject
-    private StandardTypeInferService analysisService;
 
 
     /**
@@ -33,17 +31,34 @@ public class StandardSegmentService {
     public String doStandardNameSeg(List<String> readList) {
         StringBuilder builder = new StringBuilder();
         readList.stream().filter(StringUtils::isNotEmpty).forEach(l -> {
+            builder.append(l).append("\t");
             List<SegToken> segTokens = segmentService.doSegment(TranslateHelper.replaceSign(l));
             StringBuilder sb = new StringBuilder();
             StringBuilder sb2 = new StringBuilder();
             for (SegToken segToken : segTokens) {
-                sb.append(segToken.word).append("_");
-                sb2.append(translateHelper.translate(segToken.word)).append("_");
+                sb.append(segToken.word.toUpperCase()).append("_");
+                sb2.append(translateHelper.translate(segToken.word.toUpperCase())).append("_");
             }
-            builder.append(sb.deleteCharAt(sb.length() - 1).append("\t").append(sb2.deleteCharAt(sb2.length() - 1)).append("\r\n"));
+            sb.deleteCharAt(sb.length() - 1);
+            sb2.deleteCharAt(sb2.length() - 1);
+            builder.append(sb).append("\t")
+                    .append(sb2).append("\t")
+                    .append(verifyColEnName(sb2.toString()))
+                    .append("\r\n");
         });
         return builder.toString();
     }
 
+
+    public String verifyColEnName(String colEnName){
+        String msg = "";
+        if(colEnName.contains("?")){
+            msg += "包含未收录的词根;";
+        }
+        if(colEnName.split("_").length > 4){
+            msg+="分词数量过长;";
+        }
+        return msg;
+    }
 
 }

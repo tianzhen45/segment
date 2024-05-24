@@ -19,4 +19,4 @@ services:
       - MYSQL_ROOT_PASSWORD=root
       - MYSQL_DATABASE=seg
     volumes:
-      - E:/DevelopSpace/segment/mysql/data:/var/lib/mysql # mysql容器数据存储目录挂载到宿主机固定目录下，所有该镜像下的容器都共用数据库数据
+      - D:/DevelopSpace/segment/mysql/data:/var/lib/mysql # mysql容器数据存储目录挂载到宿主机固定目录下，所有该镜像下的容器都共用数据库数据

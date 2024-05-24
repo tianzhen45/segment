@@ -1,20 +1,19 @@
-package my.st.domain.repo;
+package my.st.web.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import my.st.domain.repo.Word;
 
-@Entity(name = "t_word")
-public class Word {
 
-    @Id
+public class WordParam implements RequestParam {
+
     private String cnName;
 
     private String enName;
 
-    public Word() {
+    public Word toWord(){
+        return new Word(this.cnName,this.enName);
     }
 
-    public Word(String cnName, String enName) {
+    public WordParam(String cnName, String enName) {
         this.cnName = cnName;
         this.enName = enName;
     }
@@ -33,13 +32,5 @@ public class Word {
 
     public void setEnName(String enName) {
         this.enName = enName;
-    }
-
-    @Override
-    public String toString() {
-        return "Word{" +
-                "cnName='" + cnName + '\'' +
-                ", enName='" + enName + '\'' +
-                '}';
     }
 }

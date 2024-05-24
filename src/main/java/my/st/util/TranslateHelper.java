@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
+import javax.annotation.Resource;
 import javax.inject.Inject;
 import java.util.HashMap;
 import java.util.Map;
@@ -24,12 +25,12 @@ public class TranslateHelper {
 
     public final static Logger logger = LoggerFactory.getLogger(TranslateHelper.class);
 
-    @Inject
+    @Resource
     WordRepository wordRepository;
 
 
     @PostConstruct
-    private void init(){
+    public void init(){
         for (Word word : wordRepository.findAll()) {
             WORD_MAP.put(word.getCnName(),word.getEnName());
         }

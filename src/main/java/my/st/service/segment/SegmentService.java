@@ -3,8 +3,8 @@ package my.st.service.segment;
 import com.huaban.analysis.jieba.JiebaSegmenter;
 import com.huaban.analysis.jieba.SegToken;
 import com.huaban.analysis.jieba.WordDictionary;
-import my.st.util.CSVUtil;
-import org.apache.commons.csv.CSVRecord;
+import my.st.domain.repo.Word;
+import my.st.domain.repo.WordRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
+import javax.annotation.Resource;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Paths;
@@ -33,8 +34,8 @@ public class SegmentService {
 
     public final static Logger logger = LoggerFactory.getLogger(SegmentService.class);
 
-    @Autowired
-    CSVUtil csvUtil;
+    @Resource
+    private WordRepository wordRepository;
 
     @Value("${myapp.dict-path}")
     private String dictPath;
@@ -44,29 +45,30 @@ public class SegmentService {
 
 
     /**
-     * 加载csv词根文件到dict
+     * 从数据库加载单词到dict
      */
     @PostConstruct
     private void init(){
         try {
-            List<CSVRecord> records = csvUtil.getWordRecords();
             FileWriter fileWriter = new FileWriter(dictPath);
-            records.forEach( r ->
-                    {
-                        try {
-                            fileWriter.write(String.format("%s %s %s\n", r.get(1), "300", "n"));
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
-                    }
-            );
+            List<Word> wordList = wordRepository.findAll();
+            for (Word word : wordList) {
+                try {
+                    fileWriter.write(String.format("%s %s %s\n", word.getCnName(), "300", "n"));
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
             fileWriter.close();
             WordDictionary.getInstance().init(Paths.get(configPath));
-            logger.info("词根库初始化完成，加载数量:{}\n",records.size());
+            logger.info("词根库初始化完成，加载数量:{}\n",wordList.size());
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
+
+
+
 
     public List<SegToken> doSegment(String sentence) {
         return segmenter.process(Optional.ofNullable(sentence).orElse(""), JiebaSegmenter.SegMode.SEARCH);
@@ -86,9 +88,9 @@ public class SegmentService {
     }
 
     /**
-     * 重新加载csv中的词典文件
+     * 重新加载DB中的词根到词典文件中
      */
-    public void reloadCsvDict(){
+    public void reloadDBDict(){
         resetDictCache();
         init();
     }
