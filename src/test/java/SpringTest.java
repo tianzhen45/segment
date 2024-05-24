@@ -27,8 +27,6 @@ public class SpringTest {
     @Inject
     private StandardSegmentService standardSegmentService;
 
-    @Inject
-    private StandardMap standardMap;
 
 
 
