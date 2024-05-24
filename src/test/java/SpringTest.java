@@ -43,10 +43,6 @@ public class SpringTest {
         System.out.println(s);
     }
 
-    @Test
-    public void testStMap(){
-        System.out.println(standardMap.ST_MAP.get("特别委托授权对象"));
-    }
 
     @Test
     public void testSegService2() {
