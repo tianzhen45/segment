@@ -10,7 +10,7 @@ public class CommonCol {
 
     private String colName;
 
-    private String colEnName;
+    private String colCnName;
 
     private String type;
 
@@ -42,12 +42,12 @@ public class CommonCol {
         this.colName = colName;
     }
 
-    public String getColEnName() {
-        return colEnName;
+    public String getColCnName() {
+        return colCnName;
     }
 
-    public void setColEnName(String colEnName) {
-        this.colEnName = colEnName;
+    public void setColCnName(String colEnName) {
+        this.colCnName = colEnName;
     }
 
     public String getType() {

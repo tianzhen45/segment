@@ -21,8 +21,8 @@ public class SqlController {
     private CommonColRepository commonColRepository;
 
     @PostMapping("/DDL")
-    public String importWords(@RequestBody ListAndObjectParam<ColumnEntry,Integer> data){
-        return sqlGenerateService.genSqlScript(data.getList());
+    public String genDDL(@RequestBody ListAndObjectParam<ColumnEntry,String> data){
+        return sqlGenerateService.genSqlScript(data.getList(), data.getObjectParam());
     }
 
     @PostMapping("/commonCol")

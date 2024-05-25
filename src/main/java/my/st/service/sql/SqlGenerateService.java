@@ -3,8 +3,11 @@ package my.st.service.sql;
 import my.st.domain.entity.Column;
 import my.st.domain.entity.ColumnEntry;
 import my.st.domain.entity.Table;
+import my.st.domain.repo.CommonCol;
+import my.st.domain.repo.CommonColRepository;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.Resource;
 import java.util.*;
 
 @Component
@@ -22,6 +25,8 @@ public class SqlGenerateService {
         DATE_TYPE_STRING_SET.add("TEXT");
     }
 
+    @Resource
+    private CommonColRepository commonColRepository;
 
 
     public  String genDropScript(Table table) {
@@ -53,9 +58,18 @@ public class SqlGenerateService {
         return sql.toString();
     }
 
-    public String genSqlScript(List<ColumnEntry> list) {
+    public String genSqlScript(List<ColumnEntry> list,String system_code) {
+        List<CommonCol> commonCols = commonColRepository.findBySystemCode(system_code);
         StringBuilder sb = new StringBuilder();
         for (Table table : toTables(list)) {
+            for (CommonCol commonCol : commonCols) {
+                Column column = new Column();
+                column.setColumnName(commonCol.getColName());
+                column.setComment(commonCol.getColCnName());
+                column.setLength(commonCol.getLen());
+                column.setDataType(commonCol.getType());
+                table.addColumn(column);
+            }
             sb.append(genSqlScript(table));
         }
         return sb.toString();

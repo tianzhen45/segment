@@ -5,7 +5,7 @@ CREATE TABLE IF NOT EXISTS `t_word`  (
 CREATE TABLE `t_common_col`  (
                                  `ID` int(11),
                                  `COL_NAME` varchar(255),
-                                 `COL_EN_NAME` varchar(255),
+                                 `COL_CN_NAME` varchar(255),
                                  `TYPE` varchar(255),
                                  `LEN` varchar(255),
                                  `SYSTEM_CODE` varchar(255),

@@ -34,4 +34,8 @@ public class Table {
     public void setColList(List<Column> colList) {
         this.colList = colList;
     }
+
+    public void addColumn(Column column){
+        this.colList.add(column);
+    }
 }
