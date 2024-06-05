@@ -1,6 +1,10 @@
 myapp:
   dict-path: /app/config/user.dict
   config-path: /app/config
+logging:
+  level:
+    org.hibernate.sql: debug
+    org.hibernate.type.descriptor.sql.BasicBinder: trace
 spring:
   datasource:
     url: jdbc:h2:file:/app/h2db
