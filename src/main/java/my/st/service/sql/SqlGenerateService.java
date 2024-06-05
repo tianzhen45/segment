@@ -6,11 +6,12 @@ import my.st.domain.entity.Table;
 import my.st.domain.repo.CommonCol;
 import my.st.domain.repo.CommonColRepository;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.*;
 
-@Component
+@Service
 public class SqlGenerateService {
 
     public static final boolean IS_VALID_SQL = true;
