@@ -10,12 +10,10 @@ import my.st.web.entity.WordParam;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 @RestController
 @RequestMapping("/word")
@@ -64,7 +62,11 @@ public class WordController {
             return "导入失败";
         }
         return "成功导入！";
+    }
 
+    @GetMapping("/queryWord")
+    public List<Word> queryWord(String cnName){
+        return wordRepository.findByCnName(cnName);
     }
 
 }

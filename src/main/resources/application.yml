@@ -1,5 +1,5 @@
 server:
-  port: 9888
+  port: 9999
   # 后端统一地址前缀
   servlet:
     context-path: /seg
@@ -20,7 +20,8 @@ spring:
     console:
       path: /h2-console
       enabled: true
-
+      settings:
+        web-allow-others: true
 
 
 big-model:

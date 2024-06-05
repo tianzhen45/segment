@@ -44,54 +44,59 @@ public class SegmentService {
     private String configPath;
 
 
+
+    @PostConstruct
+    private void init() {
+        try {
+            writeDictFromDB();
+            WordDictionary.getInstance().init(Paths.get(configPath));
+            logger.info("词根库初始化完成");
+        } catch (Exception e) {
+            logger.error("分词词典加载失败，请检查词典路径以及词典中是否有非法字符;",e);
+        }
+    }
+
     /**
      * 从数据库加载单词到dict
      */
-    @PostConstruct
-    private void init(){
+    public void writeDictFromDB() {
         try {
             FileWriter fileWriter = new FileWriter(dictPath);
             List<Word> wordList = wordRepository.findAll();
             for (Word word : wordList) {
-                try {
-                    fileWriter.write(String.format("%s %s %s\n", word.getCnName(), "300", "n"));
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+                fileWriter.write(String.format("%s %s %s\n", word.getCnName(), "300", "n"));
             }
             fileWriter.close();
-            WordDictionary.getInstance().init(Paths.get(configPath));
-            logger.info("词根库初始化完成，加载数量:{}\n",wordList.size());
-        } catch (Exception e) {
-            e.printStackTrace();
+            logger.info("从数据库中写入词根到词典文件中，加载数量:{}\n", wordList.size());
+        } catch (IOException e) {
+            logger.error("从数据库中写入词根到词典文件失败;",e);
         }
     }
-
-
 
 
     public List<SegToken> doSegment(String sentence) {
         return segmenter.process(Optional.ofNullable(sentence).orElse(""), JiebaSegmenter.SegMode.SEARCH);
     }
 
-    public List<SegToken> doSegment(String sentence,JiebaSegmenter.SegMode mode) {
+    public List<SegToken> doSegment(String sentence, JiebaSegmenter.SegMode mode) {
         return segmenter.process(Optional.ofNullable(sentence).orElse(""), mode);
     }
 
     /**
      * 清空内存中的词典缓存
      */
-    private void resetDictCache(){
+    private void resetDictCache() {
         WordDictionary.getInstance().freqs.clear();
         WordDictionary.getInstance().loadDict();
+        WordDictionary.getInstance().loadUserDict(Paths.get(dictPath));
         logger.info("清空内存中的词典缓存完成\n");
     }
 
     /**
-     * 重新加载DB中的词根到词典文件中
+     * 重新加载DB中的词根到词典文件中，并重置词典分词
      */
-    public void reloadDBDict(){
+    public void reloadDBDict() {
+        writeDictFromDB();
         resetDictCache();
-        init();
     }
 }

@@ -1,8 +1,19 @@
 version: '3'
 services:
-  myapp:
+  segment:
     build:
       context: .
       dockerfile: Dockerfile
     ports:
-      - "9876:9876"
+      - "9999:9999"
+    container_name: segment
+  portal:
+    build:
+      context: ../../DevLab/vue-webpack-demo
+      dockerfile: Dockerfile
+    ports:
+      - "80:80"
+    links:
+      - segment
+    container_name: portal
+    depends_on: [segment]

@@ -1,9 +1,9 @@
 myapp:
   dict-path: /app/config/user.dict
   config-path: /app/config
-
+spring:
   datasource:
-    url: jdbc:h2:file:/app/h2db;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+    url: jdbc:h2:file:/app/h2db
     username: sa
     password: password
     driverClassName: org.h2.Driver
