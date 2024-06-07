@@ -1,5 +1,8 @@
 server:
-  port: 9876
+  port: 9999
+  # 后端统一地址前缀
+  servlet:
+    context-path: /seg
 logging:
   pattern:
     console: "%clr(%d{HH:mm:ss.SSS}){faint} %clr(${LOG_LEVEL_PATTERN:%5p}) %clr(-){faint} %clr([%t]){faint} %clr(%-40logger{39}){cyan}[%line]%clr(:){faint} %m%n${LOG_EXCEPTION_CONVERSION_WORD:%wEx}"
@@ -8,9 +11,23 @@ logging:
 spring:
   profiles:
     active: dev
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+  h2:
+    console:
+      path: /h2-console
+      enabled: true
+      settings:
+        web-allow-others: true
+
 
 big-model:
   host-url: https://spark-api.xf-yun.com/v3.1/chat
   app-id: 219fd387
   api-secret: MWE0YjNiNjRhOGQ3YTVhZGJhNjllOGE3
   api-key: 3b78dc95b907235d474625f3d7ee8e72
+
+
