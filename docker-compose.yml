@@ -9,7 +9,7 @@ services:
     container_name: segment
   portal:
     build:
-      context: ../../DevLab/vue-webpack-demo
+      context: ../../DevLab/segment-portal
       dockerfile: Dockerfile
     ports:
       - "80:80"
